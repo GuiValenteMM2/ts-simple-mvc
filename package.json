@@ -1,0 +1,22 @@
+{
+  "name": "ts-simple-mvc",
+  "version": "1.0.0",
+  "description": "Learning TypeScript while building a simple api",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "ts-simple-mvc": "file:"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.5.5",
+    "typescript": "^5.6.2"
+  }
+}
