@@ -1,35 +1,62 @@
 import * as fs from 'fs'; 
 import { Todo } from './Todo.ts';
 
-const dataPath = 'storage.json';
-
 export const Persistance = {
-    getJsonData(): JSON {
-        const data = fs.readFileSync(dataPath);
-        return JSON.parse(data.toString());    
+    dataPath: "./src/model/storage.json",
+
+    getJsonData(): string {
+        const data = fs.readFileSync(this.dataPath).toString();
+        const jsonString = JSON.parse(data);
+        return jsonString;
     },
 
     storageSize(): number {
-        let data: any = [];
-        data = fs.readFileSync(dataPath);
+        const data = fs.readFileSync(this.dataPath).toString();
+        const jsonData = JSON.parse(data);
 
-        return data.length;
+        return jsonData["data"].length;
     },
 
-    writeOnJson(id: number, newData: Todo): Boolean {
+    writeOnJson(id: number, newData: Todo) {
+        if (fs.existsSync(this.dataPath)) {
+            const actualData = fs.readFileSync(this.dataPath).toString();
+            const parsedData = JSON.parse(actualData);
 
-        let actualData: any = [];
-        
-        if (fs.existsSync(dataPath)) {
-            actualData = fs.readFileSync(dataPath);
-            actualData.push({id,
-                             newData});
+            parsedData.data.push({
+                id,
+                newData
+            });
+
+            const finalData = JSON.stringify(parsedData);   
+            fs.writeFileSync(this.dataPath ,finalData);
+        } 
+    },
+
+    delOnJson(id: number) {
+        if (fs.existsSync(this.dataPath)) {
+            const actualData = fs.readFileSync(this.dataPath).toString();
+            const parsedData = JSON.parse(actualData);
             
-            const finalData = JSON.stringify(actualData);   
-            fs.writeFileSync(dataPath ,finalData);
-            return true;
-        } else {
-            return false;
+            if (id >= 0 && id < parsedData.length) {
+                parsedData.data.splice(id, 1);
+            
+                const finalData = JSON.stringify(parsedData);
+                fs.writeFileSync(this.dataPath, finalData);
+            }
+        }
+    },
+
+    updateOnJson(id: number, newItem: Todo) {
+        if (fs.existsSync(this.dataPath)) {
+            const actualData = fs.readFileSync(this.dataPath).toString();
+            const parsedData = JSON.parse(actualData);
+
+            if (id >= 0 && id <= parsedData.length) {
+                parsedData.splice(id, 1, newItem);
+
+                const finalData = JSON.stringify(parsedData);
+                fs.writeFileSync(this.dataPath, finalData);
+            }
         }
     }
 };
