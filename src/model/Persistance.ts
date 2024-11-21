@@ -37,7 +37,7 @@ export const Persistance = {
             const actualData = fs.readFileSync(this.dataPath).toString();
             const parsedData = JSON.parse(actualData);
             
-            if (id >= 0 && id < parsedData.length) {
+            if (id < parsedData.data.length && id >= 0) {
                 parsedData.data.splice(id, 1);
             
                 const finalData = JSON.stringify(parsedData);
@@ -52,7 +52,7 @@ export const Persistance = {
             const parsedData = JSON.parse(actualData);
 
             if (id >= 0 && id <= parsedData.length) {
-                parsedData.splice(id, 1, newItem);
+                parsedData.data.splice(id, 1, newItem);
 
                 const finalData = JSON.stringify(parsedData);
                 fs.writeFileSync(this.dataPath, finalData);
