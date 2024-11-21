@@ -8,11 +8,11 @@ A folder for the model and business logic;\
 A folder for the controller;
 
 # main-entity
-A todo item that have a name, description, due date and category;\
+A todo item that have a name, description, due date and category;
 
 # add-on-info
 Initially, it's a project for operating crud on a JSON file storing todo items;\
-It's open for a future implementation of a db;\
+It's open for a future implementation of a db;
 
 # final thoughts
 This project have a persistance layer and a controller layer, the app file consumes the middleware created in the controller layer;\
