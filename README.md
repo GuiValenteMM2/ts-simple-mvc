@@ -14,3 +14,6 @@ A todo item that have a name, description, due date and category;
 Initially, it's a project for operating crud on a JSON file storing todo items;
 It's open for a future implementation of a db;
 
+# final thoughts
+This project have a persistance layer and a controller layer, the app file consumes the middleware created in the controller layer;
+In the controller layer there is communication with the persistance where there are methods to be applied in the json file;
